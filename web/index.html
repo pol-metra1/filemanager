@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Файловый менеджер</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="app">
+        <div class="toolbar">
+            <button id="uploadBtn" class="btn">📤 Загрузить</button>
+            <button id="mkdirBtn" class="btn">📁 Создать папку</button>
+            <button id="deleteBtn" class="btn" disabled>🗑 Удалить</button>
+            <button id="moveBtn" class="btn" disabled>✂️ Переместить</button>
+            <div class="path-bar">
+                <span id="currentPathDisplay">/</span>
+                <button id="upBtn" class="btn small">⬆ Наверх</button>
+            </div>
+        </div>
+        <div class="file-list-container">
+            <table id="fileTable">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="selectAll"></th>
+                        <th>Превью</th>
+                        <th data-sort="name">Имя 🔽</th>
+                        <th data-sort="type">Тип</th>
+                        <th data-sort="size">Размер</th>
+                        <th data-sort="modTime">Дата изменения</th>
+                    </tr>
+                </thead>
+                <tbody id="fileListBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Модальное окно для создания папки -->
+    <div id="mkdirModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Создать папку</h3>
+            <input type="text" id="newFolderName" placeholder="Имя папки">
+            <button id="confirmMkdir">Создать</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно для удаления (подтверждение) -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Подтверждение удаления</h3>
+            <p>Вы действительно хотите удалить выбранные элементы?</p>
+            <button id="confirmDelete">Удалить</button>
+            <button id="cancelDelete">Отмена</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно для перемещения -->
+    <div id="moveModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Переместить выбранные элементы</h3>
+            <div>
+                <label>Путь назначения:</label>
+                <input type="text" id="destPathInput" placeholder="например: папка/подпапка">
+                <button id="selectPathFromTree">Выбрать из дерева</button>
+            </div>
+            <div id="treeContainer" style="display:none; max-height:200px; overflow-y:auto; border:1px solid #444; margin-top:10px;"></div>
+            <button id="confirmMove">Переместить</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно предпросмотра -->
+    <div id="previewModal" class="modal">
+        <div class="modal-content preview-content">
+            <span class="close">&times;</span>
+            <div id="previewContainer"></div>
+        </div>
+    </div>
+
+    <!-- Toast уведомления -->
+    <div id="toastContainer"></div>
+
+    <script src="/script.js"></script>
+</body>
+</html>

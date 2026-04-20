@@ -1,0 +1,254 @@
+:root {
+    --bg-color: #0a0e14;
+    --surface-color: #1a1f2a;
+    --primary: #4c9aff;
+    --primary-hover: #3a7bcb;
+    --text: #eef2ff;
+    --text-secondary: #8b95b0;
+    --border: #2d3440;
+    --danger: #ff6b6b;
+    --success: #51cf66;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text);
+    font-family: 'Segoe UI', 'Roboto', monospace;
+    margin: 0;
+    padding: 0;
+}
+
+.app {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    background: var(--surface-color);
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border);
+}
+
+.btn {
+    background: #2d3440;
+    border: none;
+    color: var(--text);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: 0.2s;
+}
+
+.btn:hover:not(:disabled) {
+    background: var(--primary);
+    color: white;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn.small {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.8rem;
+}
+
+.path-bar {
+    flex: 1;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    background: #0a0e14;
+    padding: 0.25rem 0.75rem;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 0.9rem;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.file-list-container {
+    background: var(--surface-color);
+    border-radius: 12px;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+th, td {
+    text-align: left;
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--border);
+}
+
+th {
+    background: #11161f;
+    cursor: pointer;
+    user-select: none;
+    position: sticky;
+    top: 0;
+}
+
+th:hover {
+    background: #1e2633;
+}
+
+tr:hover {
+    background: rgba(76, 154, 255, 0.1);
+}
+
+/* Стиль для миниатюр */
+.thumbnail {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #2d3440;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.file-name {
+    cursor: pointer;
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.file-name:hover {
+    text-decoration: underline;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: var(--surface-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+    width: 90%;
+    max-width: 500px;
+    border: 1px solid var(--border);
+    position: relative;
+}
+
+.preview-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: auto;
+}
+
+.close {
+    position: absolute;
+    right: 1rem;
+    top: 0.5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+}
+
+.close:hover {
+    color: var(--text);
+}
+
+input, button {
+    font-family: inherit;
+}
+
+input {
+    background: #0a0e14;
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.5rem;
+    border-radius: 6px;
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+#treeContainer {
+    background: #0a0e14;
+    border-radius: 8px;
+    padding: 0.5rem;
+}
+
+.tree-node {
+    margin-left: 1rem;
+    cursor: pointer;
+    padding: 0.2rem;
+}
+
+.tree-node:hover {
+    background: #2d3440;
+}
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #2d3440;
+    color: #fff;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 2000;
+    animation: fadein 0.3s, fadeout 0.3s 2.7s;
+    font-size: 0.9rem;
+}
+
+@keyframes fadein {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeout {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@media (max-width: 768px) {
+    .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .path-bar {
+        justify-content: space-between;
+    }
+    th, td {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+    .thumbnail {
+        width: 48px;
+        height: 48px;
+        font-size: 1.6rem;
+    }
+}
